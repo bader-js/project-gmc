@@ -12,7 +12,7 @@ export default class List extends Component {
       .catch(err => console.log(err));
   };
 
-  configtoken = () => {
+  configToken() {
     const token = localStorage.getItem("token");
     const config = {
       headers: {
@@ -24,13 +24,33 @@ export default class List extends Component {
     }
 
     return config;
-  };
+  }
+
+  sendMail(request) {
+    const token = this.configToken();
+    const userMailOptions = {
+      to: request.usermail,
+      text: `Dear ${request.username}, 
+
+Congratulations, the request you applied for on ${request.date} has been approved.
+
+Kind Regards,
+Safouene Abbachi`
+    };
+    axios
+      .post(
+        "http://localhost:5000/api/application/sendmail",
+        userMailOptions,
+        token
+      )
+      .then(() => console.log("Mail is sent successfully"));
+  }
 
   getApplication = () => {
     axios
       .get(
         "http://localhost:5000/api/application/getApplications",
-        this.configtoken()
+        this.configToken()
       )
       .then(res =>
         this.setState({
@@ -54,7 +74,13 @@ export default class List extends Component {
                 Monthly Instalement : {el.monthlyInstalement} DT
               </h6>
               <p class="card-text">Rate : {el.rate}</p>
-              <button type="button" class="btn btn-success">
+              <button
+                type="button"
+                class="btn btn-success"
+                onClick={() => {
+                  this.sendMail(el);
+                }}
+              >
                 Approve
               </button>
               <button

@@ -58,7 +58,7 @@
     "type": "git",
     "url": "git+https://github.com/bader-js/project-gmc.git"
   },
-  "author": "safouene",
+  "author": "bader",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/bader-js/project-gmc/issues"

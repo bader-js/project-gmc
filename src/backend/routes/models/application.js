@@ -15,6 +15,18 @@ const ApplicationSchema = new Schema({
   rate: {
     type: Number,
     required: true
+  },
+  username: {
+    type: String,
+    required: true
+  },
+  usermail: {
+    type: String,
+    required: true
+  },
+  date: {
+    type: Date,
+    default: Date.now()
   }
 });
 

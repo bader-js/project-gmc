@@ -63,7 +63,7 @@ class Login extends Component {
   componentDidMount() {
     axios.get("/api/users/current", this.configtoken()).then(res => {
       console.log(res.data);
-      this.setState({ nametoken: res.data.name });
+      this.setState({ currentUser: res.data });
     });
   }
 
@@ -81,7 +81,6 @@ class Login extends Component {
 
         <div class="login">
           <div>
-            <p>{this.state.nametoken}</p>
             <input
               type="text"
               name="email"
